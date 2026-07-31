@@ -1,10 +1,541 @@
 <!DOCTYPE html>
-<html>
+<html lang="it" class="dark scroll-smooth">
 <head>
-    <title>Benvenuto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borsoft | Software Engineering & Tactical Project Management</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#030712',
+                            900: '#0a1128',
+                            850: '#101b3b',
+                            800: '#1c2541',
+                            700: '#2a3b63',
+                            600: '#3a506b',
+                        },
+                        accent: {
+                            blue: '#3b82f6',
+                            cyan: '#06b6d4',
+                            gold: '#f59e0b',
+                            crimson: '#ef4444',
+                            emerald: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a1128;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(28, 37, 65, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 12px 30px -10px rgba(59, 130, 246, 0.25);
+        }
+
+        /* Hexagonal Grid Overlay for subtlety */
+        .hex-bg {
+            background-image: radial-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+
+        /* RPG Mode Glow */
+        .wargame-mode .glow-rpg {
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            border-color: rgba(245, 158, 11, 0.5) !important;
+        }
+
+        .wargame-mode .text-accent-blue {
+            color: #f59e0b !important;
+        }
+
+        .wargame-mode .bg-blue-600 {
+            background-color: #d97706 !important;
+        }
+
+        .wargame-mode .bg-blue-600:hover {
+            background-color: #b45309 !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a1128;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1c2541;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.05); }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 6s infinite ease-in-out;
+        }
+    </style>
 </head>
-<body>
-    <h1>Sito in costruzione</h1>
-    <p>Questa &egrave; la mia nuova pagina statica!</p>
+<body class="selection:bg-accent-blue selection:text-white transition-colors duration-500">
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-navy-800/80 px-4 lg:px-8 py-3.5 transition-all">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-accent-blue via-navy-700 to-indigo-900 p-0.5 shadow-lg group-hover:shadow-blue-500/30 transition-all">
+                    <div class="w-full h-full bg-navy-900 rounded-[10px] flex items-center justify-center relative overflow-hidden">
+                        <span id="logoIcon" class="font-black text-2xl text-white font-sans group-hover:scale-110 transition-transform select-none">B</span>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-xl tracking-tight text-white flex items-center gap-1.5">
+                        BORSOFT <span class="w-2 h-2 rounded-full bg-accent-blue animate-ping"></span>
+                    </span>
+                    <span id="brandSubtitle" class="text-[10px] uppercase tracking-widest text-slate-400 font-mono">Digital Solutions</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#servizi" class="hover:text-accent-blue transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-layer-group text-xs opacity-70"></i> <span data-b2b="Servizi" data-rpg="Sistemi di Gioco">Servizi</span>
+                </a>
+                <a href="#metodo" class="hover:text-accent-blue transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-chess-knight text-xs opacity-70"></i> <span data-b2b="Metodologia" data-rpg="Regolamento & Tattica">Metodologia</span>
+                </a>
+            </nav>
+
+            <!-- Mode Switcher Toggle -->
+            <div class="flex items-center gap-3">
+                <!-- Dual Mode Toggle Button -->
+                <button id="modeToggleBtn" onclick="toggleWargameMode()" class="px-3 py-1.5 rounded-lg bg-navy-800 border border-navy-700 hover:border-slate-500 text-xs font-mono text-slate-300 flex items-center gap-2 transition-all shadow-inner group" title="Attiva/Disattiva vista tattica Wargame">
+                    <span class="w-2 h-2 rounded-full bg-slate-500 group-hover:bg-accent-gold transition-colors" id="toggleIndicator"></span>
+                    <span id="toggleText" class="hidden sm:inline">Vista B2B</span>
+                    <i id="toggleIcon" class="fa-solid fa-eye text-accent-blue"></i>
+                </button>
+
+                <!-- Mobile menu button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden mt-3 pt-3 border-t border-navy-800 flex flex-col gap-3 text-sm text-slate-300">
+            <a href="#servizi" onclick="toggleMobileMenu()" class="py-1 px-2 hover:bg-navy-800 rounded">Servizi / Sistemi</a>
+            <a href="#metodo" onclick="toggleMobileMenu()" class="py-1 px-2 hover:bg-navy-800 rounded">Metodologia Tattica</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden hex-bg">
+        <!-- Background Ambient Lighting -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent-blue/15 rounded-full blur-[140px] pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute bottom-10 right-10 w-[350px] h-[350px] bg-indigo-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <!-- Interactive Canvas Background -->
+        <canvas id="heroCanvas" class="absolute inset-0 pointer-events-none opacity-40"></canvas>
+
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 relative z-10 text-center">
+            
+            <!-- Corporate Tag badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border-navy-700 text-xs font-mono text-accent-cyan mb-8 animate-bounce-short">
+                <i class="fa-solid fa-shield-halved text-accent-blue" id="heroBadgeIcon"></i>
+                <span id="heroBadgeText" data-b2b="Enterprise Software & Project Orchestration" data-rpg="High-Tactics Wargaming & RPG Engine Frameworks">Enterprise Software & Project Orchestration</span>
+            </div>
+
+            <!-- Main Title -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-5xl mx-auto leading-[1.15] mb-6">
+                <span data-b2b="Ingegneria Software e Strategia Operativa per Ambienti Complessi." data-rpg="Architetture per Wargames, Moduli RPG e Piattaforme Tattiche.">
+                    Ingegneria Software e Strategia Operativa per Ambienti Complessi.
+                </span>
+            </h1>
+
+            <!-- Subtitle description -->
+            <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal" data-b2b="Borsoft sviluppa soluzioni digitali personalizzate, architetture web enterprise e metodologie di Project Management orientate alla risoluzione di scenari critici." data-rpg="Dalla gestione delle sessioni di gioco alla digitalizzazione dei regolamenti. Creiamo strumenti professionali e piattaforme web per Dungeon Master, Wargamer e appassionati di giochi di ruolo.">
+                Borsoft sviluppa soluzioni digitali personalizzate, architetture web enterprise e metodologie di Project Management orientate alla risoluzione di scenari critici.
+            </p>
+
+            <!-- Hero Action Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+                <a href="#servizi" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-base shadow-xl shadow-blue-600/25 transition-all hover:scale-105 flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-layer-group text-lg"></i>
+                    <span data-b2b="Esplora Servizi" data-rpg="Catalogo Moduli RPG">Esplora Servizi</span>
+                </a>
+                <a href="#metodo" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card hover:bg-navy-800 text-slate-200 font-semibold text-base border-slate-700 transition-all hover:scale-105 flex items-center justify-center gap-2">
+                    <span data-b2b="Metodologia" data-rpg="Regolamento & Tattica">Metodologia</span>
+                    <i class="fa-solid fa-chevron-right text-xs"></i>
+                </a>
+            </div>
+
+            <!-- Notice / Hint Banner -->
+            <div class="mt-12 inline-block text-xs font-mono text-slate-400 bg-navy-900/80 px-4 py-2 rounded-lg border border-navy-800">
+                <i class="fa-solid fa-lightbulb text-accent-gold mr-1"></i>
+                <span data-b2b="Consiglio: Attiva la 'Vista B2B / Wargame' in alto per scoprire il cuore RPG della piattaforma." data-rpg="Modalità Game Master Attiva: Tutti i sistemi sono pronti al combattimento su griglia.">Consiglio: Attiva la 'Vista B2B / Wargame' in alto per scoprire il cuore RPG della piattaforma.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servizi" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-accent-blue font-semibold mb-3" data-b2b="Competenze Core" data-rpg="Arsenale Tattico & Software">Competenze Core</h2>
+                <p class="text-3xl md:text-4xl font-bold text-white tracking-tight" data-b2b="Servizi Integrati per Trasformazione e Governance Digitale" data-rpg="Strumenti Avanzati per Wargaming e Gestione GDR">
+                    Servizi Integrati per Trasformazione e Governance Digitale
+                </p>
+                <p class="text-slate-400 mt-4 text-base" data-b2b="Dalla progettazione di backend ad alta concorrenza fino alla gestione strategica dei rischi di progetto." data-rpg="Tutti i nostri framework B2B nascono con la precisione millimetrica di un regolamento di Wargame tattico.">
+                    Dalla progettazione di backend ad alta concorrenza fino alla gestione strategica dei rischi di progetto.
+                </p>
+            </div>
+
+            <!-- Service Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service Card 1 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover relative group overflow-hidden">
+                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-all">
+                        <i class="fa-solid fa-diagram-project text-2xl text-accent-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3" data-b2b="Project Management Tattico (Agile & PMO)" data-rpg="Gestione Campagne & Quest Log (Agile GM)">
+                        Project Management Tattico (Agile & PMO)
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6" data-b2b="Supervisione end-to-end dei deliverable con analisi predittiva dei colli di bottiglia, gestione della capacità produttiva e mitigazione dinamica dei rischi." data-rpg="Coordinamento strategico dei party di sviluppo. Tracciamento degli obiettivi di missione, gestione dei turni e risoluzione di imprevisti critici.">
+                        Supervisione end-to-end dei deliverable con analisi predittiva dei colli di bottiglia, gestione della capacità produttiva e mitigazione dinamica dei rischi.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-400 space-y-2 border-t border-navy-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent-blue"></i> <span data-b2b="Sprint Planning & Risk Assessment" data-rpg="Pianificazione Turni & Tiri Salvezza">Sprint Planning & Risk Assessment</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent-blue"></i> <span data-b2b="Resource Allocation Matrix" data-rpg="Gestione Inventario e Punti Azione">Resource Allocation Matrix</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover relative group overflow-hidden">
+                    <div class="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center mb-6 group-hover:bg-cyan-500/20 transition-all">
+                        <i class="fa-solid fa-code text-2xl text-accent-cyan"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3" data-b2b="Sviluppo Software Custom & Ingegneria Web" data-rpg="Piattaforme Web GDR & Compendi Digitali">
+                        Sviluppo Software Custom & Ingegneria Web
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6" data-b2b="Progettazione di applicazioni web ad alte prestazioni, portali enterprise e soluzioni software su misura focalizzate su scalabilità e sicurezza." data-rpg="Creazione di compendi digitali, piattaforme web per schede personaggio interattive e strumenti di supporto per Dungeon Master e giocatori.">
+                        Progettazione di applicazioni web ad alte prestazioni, portali enterprise e soluzioni software su misura focalizzate su scalabilità e sicurezza.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-400 space-y-2 border-t border-navy-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent-cyan"></i> <span data-b2b="Full-Stack Web Development & API" data-rpg="Schede Personaggio & Compendi Interactive">Full-Stack Web Development & API</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent-cyan"></i> <span data-b2b="Cloud Architecture & Security" data-rpg="Gestione Inventari & Regolamenti Digitali">Cloud Architecture & Security</span></li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="glass-card p-8 rounded-2xl glass-card-hover relative group overflow-hidden">
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mb-6 group-hover:bg-amber-500/20 transition-all">
+                        <i class="fa-solid fa-book-bookmark text-2xl text-accent-gold"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3" data-b2b="Architettura Dati & Consulenza Strategica" data-rpg="Game Design & Regolamenti Tattici">
+                        Architettura Dati & Consulenza Strategica
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6" data-b2b="Definizione dell'architettura informativa, integrazione di sistemi complessi e modellazione dei flussi operativi aziendali." data-rpg="Bilanciamento delle meccaniche di gioco, progettazione delle regole di ingaggio tattico e strutturazione dei manuali di sistema.">
+                        Definizione dell'architettura informativa, integrazione di sistemi complessi e modellazione dei flussi operativi aziendali.
+                    </p>
+                    <ul class="text-xs font-mono text-slate-400 space-y-2 border-t border-navy-800 pt-4">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent-gold"></i> <span data-b2b="Data Modeling & Governance" data-rpg="Bilanciamento Meccaniche & Regole">Data Modeling & Governance</span></li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-accent-gold"></i> <span data-b2b="Digital Transformation Advisory" data-rpg="Design di Manuali & Moduli di Gioco">Digital Transformation Advisory</span></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology & Workflow -->
+    <section id="metodo" class="py-20 bg-navy-900/40 border-t border-navy-800 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8">
+            
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-xs uppercase font-mono tracking-widest text-accent-blue font-semibold mb-2" data-b2b="Framework Operativo" data-rpg="Il Protocollo di Incontro">Framework Operativo</h2>
+                <p class="text-3xl font-bold text-white" data-b2b="La Metodologia Tattica Borsoft" data-rpg="Fasi del Turno di Gioco & Progetto">
+                    La Metodologia Tattica Borsoft
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+                
+                <!-- Step 1 -->
+                <div class="glass-card p-6 rounded-xl border-navy-800 relative">
+                    <div class="text-3xl font-extrabold font-mono text-accent-blue/40 mb-3">01</div>
+                    <h3 class="text-base font-bold text-white mb-2" data-b2b="1. Iniziativa & Reconnaissance" data-rpg="1. Tiro d'Iniziativa & Ricognizione">
+                        1. Iniziativa & Reconnaissance
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-b2b="Analisi dei requisiti, audit del codice legacy e mappatura approfondita degli obiettivi di business." data-rpg="Mappatura del terreno di scontro, studio della scheda del nemico e tiro per stabilire l'ordine dei turni.">
+                        Analisi dei requisiti, audit del codice legacy e mappatura approfondita degli obiettivi di business.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card p-6 rounded-xl border-navy-800 relative">
+                    <div class="text-3xl font-extrabold font-mono text-accent-cyan/40 mb-3">02</div>
+                    <h3 class="text-base font-bold text-white mb-2" data-b2b="2. Architettura & Strategia" data-rpg="2. Strategia di Schieramento">
+                        2. Architettura & Strategia
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-b2b="Progettazione del blueprint tecnico, scelta dello stack e suddivisione dei moduli ad alta priorità." data-rpg="Disposizione delle miniature sulla griglia esagonale e definizione del piano d'attacco principale.">
+                        Progettazione del blueprint tecnico, scelta dello stack e suddivisione dei moduli ad alta priorità.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card p-6 rounded-xl border-navy-800 relative">
+                    <div class="text-3xl font-extrabold font-mono text-accent-gold/40 mb-3">03</div>
+                    <h3 class="text-base font-bold text-white mb-2" data-b2b="3. Esecuzione & Sprint" data-rpg="3. Fase di Combattimento & Azione">
+                        3. Esecuzione & Sprint
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-b2b="Sviluppo iterativo con CI/CD automatizzata, test continui e mitigazione proattiva delle regressioni." data-rpg="Lancio dei dadi d'attacco, utilizzo di abilità speciali e gestione delle risorse del party in tempo reale.">
+                        Sviluppo iterativo con CI/CD automatizzata, test continui e mitigazione proattiva delle regressioni.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="glass-card p-6 rounded-xl border-navy-800 relative">
+                    <div class="text-3xl font-extrabold font-mono text-emerald-400/40 mb-3">04</div>
+                    <h3 class="text-base font-bold text-white mb-2" data-b2b="4. Vittoria & Deployment" data-rpg="4. Vittoria & Loot del Progetto">
+                        4. Vittoria & Deployment
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed" data-b2b="Messa in produzione, monitoraggio telemetry e rilascio della documentazione completa." data-rpg="Sconfitta dei bug critici, consegna dell'esperienza utente e assegnazione Punti Esperienza (XP).">
+                        Messa in produzione, monitoraggio telemetry e rilascio della documentazione completa.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-navy-800 bg-navy-950 py-12 relative z-10 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto px-4 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-navy-800 border border-navy-700 flex items-center justify-center text-white font-black font-sans text-lg">
+                    B
+                </div>
+                <div>
+                    <div class="font-bold text-white">Borsoft Digital Solutions</div>
+                    <div class="text-[11px] text-slate-500">Wargaming & Digital Project Engineering</div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6 font-mono text-[11px]">
+                <span class="text-accent-gold"><i class="fa-solid fa-dice text-xs"></i> GM Mode Ready</span>
+            </div>
+
+            <div class="text-[11px] font-mono text-slate-500 text-center md:text-right">
+                © 2026 Borsoft. Designed for High-Tactics Platforms.
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic & Dynamics -->
+    <script>
+        // Global State variables
+        let isWargameMode = false;
+
+        // Background Particle & Grid Canvas Engine
+        const canvas = document.getElementById('heroCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = isWargameMode ? 'rgba(245, 158, 11, 0.4)' : 'rgba(59, 130, 246, 0.4)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initCanvas() {
+            particles = [];
+            for (let i = 0; i < 55; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw faint grid lines
+            ctx.strokeStyle = isWargameMode ? 'rgba(245, 158, 11, 0.05)' : 'rgba(59, 130, 246, 0.05)';
+            ctx.lineWidth = 1;
+            const step = 60;
+            for (let x = 0; x < canvas.width; x += step) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, canvas.height);
+                ctx.stroke();
+            }
+
+            // Draw particles and connection lines
+            particles.forEach((p, idx) => {
+                p.update();
+                p.draw();
+
+                for (let j = idx + 1; j < particles.length; j++) {
+                    const dx = p.x - particles[j].x;
+                    const dy = p.y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 110) {
+                        ctx.strokeStyle = isWargameMode ? `rgba(245, 158, 11, ${0.2 - dist/550})` : `rgba(59, 130, 246, ${0.2 - dist/550})`;
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animateCanvas);
+        }
+
+        initCanvas();
+        animateCanvas();
+
+        // Dual Mode Switcher (B2B vs Wargame/RPG)
+        function toggleWargameMode() {
+            isWargameMode = !isWargameMode;
+            const body = document.body;
+            const toggleText = document.getElementById('toggleText');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const toggleIndicator = document.getElementById('toggleIndicator');
+            const brandSubtitle = document.getElementById('brandSubtitle');
+
+            if (isWargameMode) {
+                body.classList.add('wargame-mode');
+                toggleText.innerText = 'Vista RPG/GM';
+                toggleIcon.className = 'fa-solid fa-dice-d20 text-accent-gold';
+                toggleIndicator.className = 'w-2 h-2 rounded-full bg-accent-gold animate-ping';
+                brandSubtitle.innerText = 'Wargames & RPG Tech';
+                playSynthSound(440, 660);
+            } else {
+                body.classList.remove('wargame-mode');
+                toggleText.innerText = 'Vista B2B';
+                toggleIcon.className = 'fa-solid fa-eye text-accent-blue';
+                toggleIndicator.className = 'w-2 h-2 rounded-full bg-slate-500';
+                brandSubtitle.innerText = 'Digital Solutions';
+                playSynthSound(520, 320);
+            }
+
+            // Update all dynamic text elements with data attributes
+            document.querySelectorAll('[data-b2b]').forEach(el => {
+                if (isWargameMode) {
+                    el.innerText = el.getAttribute('data-rpg');
+                } else {
+                    el.innerText = el.getAttribute('data-b2b');
+                }
+            });
+        }
+
+        // Simple Web Audio API Synthesizer for UI Feedback
+        function playSynthSound(freq1, freq2) {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq1, ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(freq2, ctx.currentTime + 0.15);
+
+                gain.gain.setValueAtTime(0.08, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + 0.15);
+            } catch(e) {
+                // Audio context restriction catch
+            }
+        }
+
+        // Mobile drawer toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
 </body>
 </html>
